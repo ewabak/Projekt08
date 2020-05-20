@@ -78,7 +78,7 @@ corpus <- tm_map(corpus, cutExtensions)
 #eksport zawarto�ci korpusu do plik�w tekstowych
 preprocessedDir <- paste(
   outputDir, 
-  "Teksty",
+  "Teksty-przetworzone",
   sep = "\\"
 )
 dir.create(preprocessedDir)
