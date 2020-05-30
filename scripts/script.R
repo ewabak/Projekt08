@@ -118,7 +118,7 @@ tdmTfBounds <- TermDocumentMatrix(
   corpus, 
   control = list(
     bounds = list(
-      global = c(2,16)
+      global = c(2,3)
     )
   )
 )
@@ -127,7 +127,7 @@ tdmTfidfBounds <- TermDocumentMatrix(
   control = list(
     weighting = weightTfIdf,
     bounds = list(
-      global = c(2,16)
+      global = c(2,3)
     )
   )
 )
@@ -136,7 +136,7 @@ dtmTfidfBounds <- DocumentTermMatrix(
   control = list(
     weighting = weightTfIdf,
     bounds = list(
-      global = c(2,16)
+      global = c(2,3)
     )
   )
 )
@@ -144,7 +144,7 @@ dtmTfBounds <- DocumentTermMatrix(
   corpus, 
   control = list(
     bounds = list(
-      global = c(2,16)
+      global = c(2,3)
     )
   )
 )
@@ -482,7 +482,7 @@ randEx2Ex3 <- rand.index(clusters2, clusters3)
 
 ######################### lda.r
 
-#analiza ukrytej alokacji Dirichlet'a
+#analiza ukrytej alokacji Dirichleta
 nWords <- ncol(dtmTfAll)
 nTopics <- 3
 lda <- LDA(
@@ -569,22 +569,23 @@ round(results$terms[,words2],2)
 ######################### keywords.r
 
 #dla pierwszego dokumentu
-##wagi tf jako miara wa?no?ci s??w
-keywordsTf1 <- head(sort(dtmTfAllMatrix[5,], decreasing = TRUE))
+##wagi tf jako miara wa�no�ci s��w
+keywordsTf1 <- head(sort(dtmTfAllMatrix[1,], decreasing = TRUE))
 keywordsTf1
-##wagi tfidf jako miara wa?no?ci s??w
-keywordsTfidf1 <- head(sort(dtmTfidfBoundsMatrix[5,], decreasing = TRUE))
+##wagi tfidf jako miara wa�no�ci s��w
+keywordsTfidf1 <- head(sort(dtmTfidfBoundsMatrix[1,], decreasing = TRUE))
 keywordsTfidf1
-##lda jako miara wa?no?ci s??w
-importance1 <- c(results$topics[5,]%*%results$terms)
+##lda jako miara wa�no�ci s��w
+importance1 <- c(results$topics[1,]%*%results$terms)
 names(importance1) <- colnames(results$terms)
 keywordsLda1 <- head(sort(importance1, decreasing = TRUE))
 keywordsLda1
-##chmura tag?w
+##chmura tag�w
 par(mai = c(0,0,0,0))
-wordcloud(corpus[20], max.words = 200,colors=brewer.pal(8, "PuOr"))
+wordcloud(corpus[1], max.words = 200,colors=brewer.pal(8, "PuOr"))
 ##algorytm RAKE
-text1 <- as.character(corpus[5])
+text1 <- as.character(corpus[1])
 rake1 <- slowrake(txt = text1, stem = FALSE, stop_pos = NULL)
-print(rake1[[5]])
+print(rake1[[1]])
+
 
