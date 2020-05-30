@@ -287,7 +287,7 @@ lsa$sk #odpowiednik macierzy D, znaczenie składowych
 #przygotowanie danych do wykresu
 coordTerms <- lsa$tk%*%diag(lsa$sk)
 coorDocs <- lsa$dk%*%diag(lsa$sk)
-terms <- c("przyjęcie", "susan", "samochód", "andrew", "chłopak", "demon", "gabrielle", "katherine")
+terms <- c("gracz","bitwa", "bohater", "bohaterka", "droga", "dziecko", "ekwipunek", "grafika", "grobowiec", "impresjonista", "instrukcja", "interfejs", "karta", "lekarz", "malarz", "miecz", "niebezpieczeństwo", "nowoczesny", "okres", "plansza", "przedmiot", "wymagania")
 termsImportance <- diag(lsa$tk%*%diag(lsa$sk)%*%t(diag(lsa$sk))%*%t(lsa$tk))
 importantTerms <- names(tail(sort(termsImportance),8))
 coordTerms <- coordTerms[terms,]
@@ -570,21 +570,21 @@ round(results$terms[,words2],2)
 
 #dla pierwszego dokumentu
 ##wagi tf jako miara wa?no?ci s??w
-keywordsTf1 <- head(sort(dtmTfAllMatrix[3,], decreasing = TRUE))
+keywordsTf1 <- head(sort(dtmTfAllMatrix[5,], decreasing = TRUE))
 keywordsTf1
 ##wagi tfidf jako miara wa?no?ci s??w
-keywordsTfidf1 <- head(sort(dtmTfidfBoundsMatrix[3,], decreasing = TRUE))
+keywordsTfidf1 <- head(sort(dtmTfidfBoundsMatrix[5,], decreasing = TRUE))
 keywordsTfidf1
 ##lda jako miara wa?no?ci s??w
-importance1 <- c(results$topics[3,]%*%results$terms)
+importance1 <- c(results$topics[5,]%*%results$terms)
 names(importance1) <- colnames(results$terms)
 keywordsLda1 <- head(sort(importance1, decreasing = TRUE))
 keywordsLda1
 ##chmura tag?w
 par(mai = c(0,0,0,0))
-wordcloud(corpus[3], max.words = 200,colors=brewer.pal(8, "PuOr"))
+wordcloud(corpus[20], max.words = 200,colors=brewer.pal(8, "PuOr"))
 ##algorytm RAKE
-text1 <- as.character(corpus[3])
+text1 <- as.character(corpus[5])
 rake1 <- slowrake(txt = text1, stem = FALSE, stop_pos = NULL)
-print(rake1[[3]])
+print(rake1[[5]])
 
